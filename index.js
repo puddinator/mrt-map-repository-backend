@@ -8,6 +8,8 @@ mongoose.connect(
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+    replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
   },
   (err) => {
     if (err) return console.log("Error: ", err);
