@@ -23,6 +23,7 @@ const compression = require("compression");
 const routes = require("./routes/images");
 
 const app = express();
+// app.use(helmet());
 app.use(
   helmet({
     crossOriginEmbedderPolicy: false,

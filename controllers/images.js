@@ -2,12 +2,12 @@ const multer = require("multer");
 const Images = require("../models/images");
 
 const storage = multer.diskStorage({
-  // eslint-disable-next-line object-shorthand, func-names
-  destination: function (cb) {
+  // eslint-disable-next-line func-names, object-shorthand
+  destination: function (req, file, cb) {
     cb(null, "./uploads");
   },
-  // eslint-disable-next-line object-shorthand, func-names
-  filename: function (file, cb) {
+  // eslint-disable-next-line func-names, object-shorthand
+  filename: function (req, file, cb) {
     cb(null, file.originalname);
   },
 });
