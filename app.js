@@ -20,6 +20,7 @@ mongoose.connect(
 const express = require("express");
 const helmet = require("helmet");
 const compression = require("compression");
+
 const routes = require("./routes/images");
 
 const app = express();
@@ -28,10 +29,10 @@ app.use(
   helmet({
     crossOriginEmbedderPolicy: false,
   })
-);
-app.use(compression());
-app.use(express.json());
-app.use(function (req, res, next) {
+); // security
+app.use(compression()); // reduce time taken for client
+app.use(express.json()); // parses incoming requests with JSON payloads
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
@@ -42,8 +43,9 @@ app.use(function (req, res, next) {
   next();
 });
 app.use("/", routes);
-app.use("/uploads", express.static("./uploads"));
+app.use("/uploads", express.static("./uploads")); // makes the uploads folder publicly accessible
 
 const listener = app.listen(process.env.PORT || 3000, () => {
+  // port 3000 is default
   console.log(`App is listening on port ${listener.address().port}`);
 });
