@@ -21,7 +21,7 @@ const express = require("express");
 const helmet = require("helmet");
 const compression = require("compression");
 
-const routes = require("./api/images");
+const routes = require("./routes/images");
 
 const app = express();
 // app.use(helmet());
